@@ -130,10 +130,13 @@ export class AgentInteractionProvider implements vscode.WebviewViewProvider {
             }
 
             // Reveal the panel to get user's attention
-            this._view?.show(true);
+            // Disable automatic reveal to avoid disrupting user
+            // this._view?.show(true);
 
-            // Show notification
-            this._showNotification();
+            // Show notification only if panel is not already visible
+            if (!this._view?.visible) {
+                this._showNotification();
+            }
         });
     }
 
